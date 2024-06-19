@@ -1,26 +1,17 @@
-import mysql from 'mysql2'
-import { config } from '../config/mysql.config.js'
+import { connection } from "../db/mysql.connection.js"
 
-const connection = mysql.createConnection(config)
-
-/*
-connection.query('DROP TABLE productos')
-
-connection.query(`CREATE TABLE IF NOT EXISTS productos (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
-        price FLOAT NOT NULL,
-        stock INT NOT NULL,
-        image TEXT NOT NULL
-    );`)
-*/
 
 
 const getProducts = async () => {
-    const query = `SELECT * FROM productos`
-    const [result] = await connection.promise().query(query)
-    return result
+    try {
+        const query = `SELECT * FROM productos`
+        const [result] = await connection.promise().query(query)
+        return result
+    }
+
+    catch (err) { return [] }
 }
+
 
 
 const createProduct = async (product) => {

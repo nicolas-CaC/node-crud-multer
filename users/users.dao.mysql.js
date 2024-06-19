@@ -1,11 +1,8 @@
-import mysql from 'mysql2'
-import { config } from '../config/mysql.config.js'
+import { connection } from '../db/mysql.connection.js'
 import { helpers } from './users.helpers.js'
 
 
 const table = 'usuarios'
-const connection = mysql.createConnection(config)
-
 
 
 const getUsers = async () => {
