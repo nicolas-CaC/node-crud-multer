@@ -12,6 +12,10 @@ const errorData = (req) => ({
     notConnected: {
         error_code: 10,
         error_desc: 'Problemas con la DB'
+    },
+    unexpected: {
+        error_code: 2,
+        error_desc: 'Error desconocido'
     }
 })
 
@@ -24,14 +28,21 @@ const errorController = (err, req, res, _) => {
     const errorCode = parseInt(err.message)
     const error = errorData(req)
 
-    if (errorCode === 3)
-        return res.json(error.productNotExist)
+    res.status(500)
 
-    if (errorCode === 4)
-        return res.json(error.incompleteEndpoint)
-
-    if (errorCode === 10)
-        return res.json(error.notConnected)
+    switch (errorCode) {
+        case 3:
+            res.json(error.productNotExist)
+            break;
+        case 4:
+            res.json(error.incompleteEndpoint)
+            break;
+        case 10:
+            res.json(error.notConnected)
+            break;
+        default:
+            res.json(error.unexpected);
+    }
 }
 
 export const middlewares = {
