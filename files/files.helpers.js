@@ -1,11 +1,11 @@
-const supportedTypes = ['image/jpeg', 'image/bmp', 'image/gif', 'image/jpg']
+const unsupportedTypes = ['image/jpeg', 'image/bmp', 'image/gif', 'image/jpg']
 
 const checkSupportedTypes = (filetype) => {
 
     let isSupported = true
 
-    for (let supportedType of supportedTypes)
-        if (filetype === supportedType) {
+    for (let unsupportedType of unsupportedTypes)
+        if (filetype === unsupportedType) {
             isSupported = false
             break
         }
